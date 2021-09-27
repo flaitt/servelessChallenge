@@ -1,6 +1,6 @@
 # Serverless Challenge
 
-Utilização do terraform para provisionar uma lambda, um dynamoDB e uma api-gateway que insere, atualiza, consulta e remove dados de um funcionário de uma empresa.
+Utilização do terraform para provisionar uma lambda function, um dynamoDB e uma api-gateway que insere, atualiza, consulta e remove dados de funcionários de uma empresa.
 
 ## Environments
 
@@ -16,16 +16,15 @@ Para provisionar os recursos necessários para utilização desse app, utilize o
 
 ## Utilização da api
 
-A api é controlada somente por requisições `HTTP GET` endpoint: `/v1/employees` 
+A api é acessível por requisições `HTTP GET, POST, PUT e DELETE` pelo endpoint: `/v1/employees` 
 
 Você pode testar a última versão publica exposta por mim: `https://c8qxhu5l2k.execute-api.us-east-2.amazonaws.com/employees-stage`
 
-Tendo assim, 4 ações, controladas pelo  `action` do `body`, sendo elas:
+Tendo assim, 4 ações, controladas pelo  s verbos HTTP e informações no `body`, sendo elas:
 
-### 1. Adicionar funcionário
+### 1. POST - Adicionar funcionário
  ```
-{ 
-    "action": "create",
+{
     "tableName": "Employees",
     "data": {
         "id": 2,
@@ -36,10 +35,9 @@ Tendo assim, 4 ações, controladas pelo  `action` do `body`, sendo elas:
 }
  ```
 
- ### 2. Consultar funcionário (por ID)
+ ### 2. GET - Consultar funcionário (por ID)
  ```
 { 
-    "action": "read",
     "tableName": "Employees",
     "data": {
         "id": 2
@@ -47,10 +45,9 @@ Tendo assim, 4 ações, controladas pelo  `action` do `body`, sendo elas:
 }
  ```
 
- ### 3. Atualizar dados do funcionário (por ID)
+ ### 3. PUT - Atualizar dados do funcionário (por ID)
  ```
-{ 
-    "action": "update",
+{
     "tableName": "Employees",
     "data": {
         "id": 2,
@@ -61,10 +58,9 @@ Tendo assim, 4 ações, controladas pelo  `action` do `body`, sendo elas:
 }
  ```
 
-### 4. Remover funcionário (por ID)
+### 4. DELETE - Remover funcionário (por ID)
  ```
-{ 
-    "action": "remove",
+{
     "tableName": "Employees",
     "data": {
         "id": 2
