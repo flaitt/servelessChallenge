@@ -1,0 +1,10 @@
+{ 
+    "action": "create",
+    "tableName": "Employees",
+    "data": {
+        "id": "1",
+        "age": "24",
+        "name": "Fulando De Tal",
+        "position": "Developer"
+    }
+}
