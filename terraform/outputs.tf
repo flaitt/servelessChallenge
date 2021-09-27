@@ -1,5 +1,5 @@
 output "lambda" {
-  value = aws_lambda_function.lambda.qualified_arn
+  value = aws_lambda_function.post_employee.qualified_arn
 }
 
 output "api_url" {
