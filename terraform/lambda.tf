@@ -8,15 +8,26 @@ provider "archive" {}
 data "archive_file" "post_zip" {
   type        = "zip"
   source_file = "../lambda/nodejs/employees/postEmployee.js"
-  output_path = "../lambda/nodejs/employees/postEmployee.zip"
+  output_path = "../lambda/nodejs/employees/zip/postEmployee.zip"
 }
 
 data "archive_file" "get_zip" {
   type        = "zip"
   source_file = "../lambda/nodejs/employees/getEmployee.js"
-  output_path = "../lambda/nodejs/employees/getEmployee.zip"
+  output_path = "../lambda/nodejs/employees/zip/getEmployee.zip"
 }
 
+data "archive_file" "put_zip" {
+  type        = "zip"
+  source_file = "../lambda/nodejs/employees/putEmployee.js"
+  output_path = "../lambda/nodejs/employees/zip/putEmployee.zip"
+}
+
+data "archive_file" "delete_zip" {
+  type        = "zip"
+  source_file = "../lambda/nodejs/employees/deleteEmployee.js"
+  output_path = "../lambda/nodejs/employees/zip/deleteEmployee.zip"
+}
 
 data "aws_iam_policy_document" "policy" {
   statement {
@@ -96,6 +107,30 @@ resource "aws_lambda_function" "get_employee" {
 
 }
 
+resource "aws_lambda_function" "put_employee" {
+  function_name = "putEmployee"
+
+  filename         = data.archive_file.put_zip.output_path
+  source_code_hash = data.archive_file.put_zip.output_base64sha256
+
+  role    = aws_iam_role.iam_for_lambda.arn
+  handler = "putEmployee.handler"
+  runtime = "nodejs12.x"
+
+}
+
+resource "aws_lambda_function" "delete_employee" {
+  function_name = "deleteEmployee"
+
+  filename         = data.archive_file.delete_zip.output_path
+  source_code_hash = data.archive_file.delete_zip.output_base64sha256
+
+  role    = aws_iam_role.iam_for_lambda.arn
+  handler = "deleteEmployee.handler"
+  runtime = "nodejs12.x"
+
+}
+
 resource "aws_lambda_permission" "api-post" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.post_employee.arn
@@ -106,6 +141,20 @@ resource "aws_lambda_permission" "api-post" {
 resource "aws_lambda_permission" "api-get" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.get_employee.arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:*/*"
+}
+
+resource "aws_lambda_permission" "api-put" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.put_employee.arn
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:*/*"
+}
+
+resource "aws_lambda_permission" "api-delete" {
+  action        = "lambda:InvokeFunction"
+  function_name = aws_lambda_function.delete_employee.arn
   principal     = "apigateway.amazonaws.com"
   source_arn    = "arn:aws:execute-api:${var.aws_region}:${var.aws_account_id}:*/*"
 }
