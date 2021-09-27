@@ -1,6 +1,6 @@
 # Serverless Challenge
 
-Utilização do terraform para provisionar uma api-gateway que insere, atualiza, consulta e remove dados de um funcionário de uma empresa.
+Utilização do terraform para provisionar uma lambda, um dynamoDB e uma api-gateway que insere, atualiza, consulta e remove dados de um funcionário de uma empresa.
 
 ## Environments
 
