@@ -27,7 +27,7 @@ Para provisionar os recursos necessários para utilização desse app, utilize o
 
 A api é acessível por requisições `HTTP GET, POST, PUT e DELETE` pelo endpoint: `/v1/employees` 
 
-Você pode testar a última versão publica exposta por mim: `https://c8qxhu5l2k.execute-api.us-east-2.amazonaws.com/employees-stage`
+Você pode testar a última versão publica exposta por mim: `https://5ukiokqvbi.execute-api.us-east-2.amazonaws.com/employees-stage`
 
 Tendo assim, 4 ações, controladas pelo  s verbos HTTP e informações no `body`, sendo elas:
 
