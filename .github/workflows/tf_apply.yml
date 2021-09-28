@@ -4,11 +4,7 @@ name: "Terraform Apply"
 on:
   push:
     branches:
-<<<<<<< HEAD
       - main
-=======
-      - master
->>>>>>> 79caccfd6c506e4bbc9b0650c07d9278f3f032f7
 
 jobs:
   terraform-plan:
