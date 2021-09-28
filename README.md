@@ -2,11 +2,20 @@
 
 Utilização do terraform para provisionar uma lambda function, um dynamoDB e uma api-gateway que insere, atualiza, consulta e remove dados de funcionários de uma empresa.
 
+## CI-CD 
+A cada push, é disparado uma GitHub Actions que aplica o comando "terraform apply" automáticamente. 
+
 ## Environments
 
 No arquivo terraform/variables.tf você deve adicionar sua região de utilização e sua "account id" da AWS.
 
 Deve-se também alterar a região no arquivo lambda/employees.js
+
+## Run the tests
+
+Para rodar os testes unitários, vocẽ deve ir para o diretório /lambda e rodar o comando 
+
+``` npm run test ```
 
 ## Run the app
 
