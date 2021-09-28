@@ -33,7 +33,9 @@ jobs:
       # Init pulls credentials from the .aws/credentials file by default
       - name: "Run - Terraform Init"
         run: terraform init -input=false
+        working-directory: terraform/
 
       # Auto-approve prevents the requirement of human interaction
       - name: "Run - Terraform Apply"
         run: terraform apply -input=false -auto-approve
+        working-directory: terraform/
